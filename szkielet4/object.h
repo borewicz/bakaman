@@ -28,7 +28,6 @@ class Object
 	int textureID;
 	void updateModelMatrix();
 	float _x = 0.0f, _y = 0.0f, _z = 0.0f;
-	glm::mat4 *_extraMatrix;
 public:
 	Object(const char *file, const char *texture, ShaderProgram *sp);
 	void draw();
@@ -38,7 +37,5 @@ public:
 	void setX(float x) { this->_x = x; }
 	void setY(float y) { this->_y = y; }
 	void setZ(float z) { this->_z = z; }
-	void setExtraMatrix(glm::mat4 *mat) { this->_extraMatrix = mat; }
-	glm::mat4 *extraMatrix() { return _extraMatrix;  }
 	~Object();
 };

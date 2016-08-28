@@ -1,10 +1,8 @@
 #include "map.h"
 
 
-Map::Map(/*glm::mat4 *modelMatrix*/ /* tmp */)
+Map::Map()
 {
-	//_modelMatrix = new glm::mat4(0.0f);
-	//_modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	_shaderProgram = new ShaderProgram("vshader.txt", NULL, "fshader.txt");
 	std::ifstream inputFile(".\\main.map");
 	if (!inputFile)

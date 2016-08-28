@@ -1,19 +1,5 @@
 #include "object.h"
 
-/*
-Object::Object(float *vertices, float *colors, float *normals, float *texCoords, int vertexCount, ShaderProgram *sp)
-{
-	this->vertices = vertices;
-	this->colors = colors;
-	this->normals = normals;
-	this->texCoords = texCoords;
-	this->vertexCount = vertexCount;
-	this->vertexSize = sizeof(float) * 4;
-	this->shaderProgram = sp;
-	setupVAO();
-}
-*/
-
 GLuint Object::readTexture(const char* filename) {
 	GLuint tex;
 	TGAImg img;
@@ -48,17 +34,6 @@ Object::Object(const char *file, const char *texture, ShaderProgram *sp)
 	bool result = loadObject(file, vertices, uvs, normals);
 	setupVAO();
 }
-
-/*
-GLuint Object::makeBuffer(void *data) 
-{
-	GLuint handle;
-	glGenBuffers(1, &handle);//Wygeneruj uchwyt na Vertex Buffer Object (VBO), który bêdzie zawiera³ tablicê danych
-	glBindBuffer(GL_ARRAY_BUFFER, handle);  //Uaktywnij wygenerowany uchwyt VBO 
-	glBufferData(GL_ARRAY_BUFFER, vertexCount*vertexSize, data, GL_STATIC_DRAW);//Wgraj tablicê do VBO
-	return handle;
-}
-*/
 
 void Object::assignVBOtoAttribute(char* attributeName, GLuint bufVBO, int variableSize) 
 {
