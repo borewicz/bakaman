@@ -113,8 +113,16 @@
 /*
  * Always include OpenGL and GLU headers
  */
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#else
 #include <GL/gl.h>
-#include <GL/glu.h>
+#endif
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
+#include <GL/glut.h>
+#endif
 
 /*
  * GLUT API macro definitions -- the special key codes:
