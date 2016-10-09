@@ -7,25 +7,23 @@
 #include <fstream>
 
 #include "pacman.h"
-
-enum FieldType
-{
-	WALL, //0
-	PACMAN, //1
-	GHOST, //2
-	FOOD, //3
-	BLANK //4
-};
+#include "ghost.h"
 
 class Map
 {
-	std::vector<Object*> walls, ghosts, food;
+	std::vector<Object*> walls, food;
+ // , food;
 	ShaderProgram *_shaderProgram;
+	//int** mapTable;
+	std::vector<std::vector<int>> mapTable;
 public:
 	Map();
 	void draw();
+	void manage();
 	~Map();
 	ShaderProgram* shaderProgram() { return _shaderProgram; }
 	Pacman *pacman;
+	std::vector<Ghost*> ghosts;
+	//Object*** getMapTable() { return mapTable; }
 };
 

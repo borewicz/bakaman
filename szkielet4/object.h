@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vector>
 
 #include "GL/glew.h"
@@ -9,6 +11,7 @@
 #include "glm/gtc/type_ptr.hpp"
 
 #include "obj_loader.h"
+#include "other.h"
 
 class Object
 {
@@ -34,6 +37,12 @@ public:
 	float x() { return _x; }
 	float y() { return _y; }
 	float z() { return _z; }
+	int X() {
+		return (int)_x / 2;
+	}
+	int Y() {
+		return (int)_y / 2;
+	}
 	void setX(float x) { this->_x = x; }
 	void setY(float y) { this->_y = y; }
 	void setZ(float z) { this->_z = z; }

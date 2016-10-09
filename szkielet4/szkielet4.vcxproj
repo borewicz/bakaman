@@ -78,6 +78,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="food.cpp" />
+    <ClCompile Include="ghost.cpp" />
     <ClCompile Include="main_file.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="object.cpp" />
@@ -94,9 +96,12 @@
   <ItemGroup>
     <ClInclude Include="camera.h" />
     <ClInclude Include="cube.h" />
+    <ClInclude Include="food.h" />
+    <ClInclude Include="ghost.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="obj_loader.h" />
+    <ClInclude Include="other.h" />
     <ClInclude Include="pacman.h" />
     <ClInclude Include="shaderprogram.h" />
     <ClInclude Include="teapot.h" />

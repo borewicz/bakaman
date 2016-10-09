@@ -1,25 +1,6 @@
-#include "pacman.h"
+#include "ghost.h"
 
-/*
-case GLUT_KEY_UP:
-Pacman.KierunekNewX = 0;
-Pacman.KierunekNewZ = 1;
-break;
-case GLUT_KEY_RIGHT:
-Pacman.KierunekNewX = -1;
-Pacman.KierunekNewZ = 0;
-break;
-case GLUT_KEY_DOWN:
-Pacman.KierunekNewX = 0;
-Pacman.KierunekNewZ = -1;
-break;
-case GLUT_KEY_LEFT:
-Pacman.KierunekNewX = 1;
-Pacman.KierunekNewZ = 0;
-
-
-*/
-void Pacman::loadMap()
+void Ghost::loadMap()
 {
 	std::ifstream inputFile(".\\main.map");
 	if (!inputFile)
@@ -39,36 +20,84 @@ void Pacman::loadMap()
 		for (int col = 0; col < boardSizeCol; col++)
 			inputFile >> Tablica[row][col];
 }
-
-void Pacman::goLeft()
+void Ghost::setDirection()
 {
-	//setX(x() - 0.1f);
-	KierunekNewX = -1;
-	KierunekNewZ = 0;
+	int Los;
+
+	Los = rand() % 2;
+	// jesli idzie w prawo lub lewo
+	if (KierunekX == 1 || KierunekX == -1)
+	{
+		if (Los)
+		{
+			KierunekNewZ = 1;
+			KierunekNewX = 0;
+		}
+		else
+		{
+			KierunekNewZ = -1;
+			KierunekNewX = 0;
+		}
+	}
+	// jesli idzie w gore lub dol
+	if (KierunekZ == 1 || KierunekZ == -1)
+	{
+		if (Los)
+		{
+			KierunekNewX = 1;
+			KierunekNewZ = 0;
+		}
+		else
+		{
+			KierunekNewX = -1;
+			KierunekNewZ = 0;
+		}
+	}
+	// jesli sie zatrzymal
+	if (KierunekX == 0 && KierunekZ == 0)
+	{
+		if (Los)
+		{
+			if (Los = rand() % 2)
+			{
+				// lewo
+				KierunekX = -1;
+				KierunekZ = 0;
+				KierunekNewX = -1;
+				KierunekNewZ = 0;
+			}
+			else
+			{
+				// prawo
+				KierunekX = 1;
+				KierunekZ = 0;
+				KierunekNewX = 1;
+				KierunekNewZ = 0;
+			}
+		}
+		else
+		{
+			if (Los = rand() % 2)
+			{
+				// gora
+				KierunekX = 0;
+				KierunekZ = 1;
+				KierunekNewX = 0;
+				KierunekNewZ = 1;
+			}
+			else
+			{
+				// dol
+				KierunekX = 0;
+				KierunekZ = -1;
+				KierunekNewX = 0;
+				KierunekNewZ = -1;
+			}
+		}
+	}
 }
 
-void Pacman::goDown()
-{
-	//setY(y() - 0.1f);
-	KierunekNewX = 0;
-	KierunekNewZ = -1;
-}
-
-void Pacman::goUp()
-{
-	KierunekNewX = 0;
-	KierunekNewZ = 1;
-	//setY(y() + 0.1f);
-}
-
-void Pacman::goRight()
-{
-	KierunekNewX = 1;
-	KierunekNewZ = 0;
-	//setX(x() + 0.1f);
-}
-
-void Pacman::go()
+void Ghost::go()
 {
 	if (!_start) return;
 	float Przesow = 0.17;
@@ -83,9 +112,31 @@ void Pacman::go()
 	// jesli zatrzymany
 	if (KierunekX == 0 && KierunekZ == 0)
 	{
-		KierunekX = KierunekNewX;
-		KierunekZ = KierunekNewZ;
+		setDirection();
 	}
+
+	/*
+	if (Tablica[(int)PozX][(int)PozZ] == JEDZENIE)
+	{
+	if (Muzyka) PlaySound("data/sfx/jedz.wav", NULL, SND_ASYNC | SND_NOSTOP);
+	Tablica[(int)PozX][(int)PozZ] = 0;
+	Punkty++;
+	IleJedzenia--;
+	if (Punkty % 300 == 0) Zycia++;
+	if (IleJedzenia == 0) Stan = NextPlansza;
+	}
+
+	// jedz bonus
+	if (Tablica[(int)PozX][(int)PozZ] == BONUS)
+	{
+	if (Muzyka) PlaySound("data/sfx/bonus.wav", NULL, SND_ASYNC);
+	Tablica[(int)PozX][(int)PozZ] = 0;
+	Przezroczysty = true;
+	Punkty += 5;
+	BonusCzas += 8;
+	if (BonusCzas < 9) Bonus(0);
+	}
+	*/
 	// ******************* idzie w gore **********************
 	if (KierunekZ == 1)
 	{
@@ -290,7 +341,7 @@ void Pacman::go()
 		if (KierunekNewZ == 1)
 		{
 			if ((getItemFromMap(PozNewX, PozNewZ + 2) != FieldType::WALL))
-			//	&& (PozNewX <= ((int)PozNewX))) //&& (PozNewX > (int)PozNewX - 0.1))
+				//	&& (PozNewX <= ((int)PozNewX))) //&& (PozNewX > (int)PozNewX - 0.1))
 			{
 				PozX = (int)PozNewX;
 				if ((int)PozX % 2 == 1)
@@ -305,7 +356,7 @@ void Pacman::go()
 		else if (KierunekNewZ == -1)
 		{
 			if ((getItemFromMap(PozNewX, PozNewZ - 2) != FieldType::WALL))
-//				&& (PozNewX <= ((int)PozNewX))) //&& (PozNewX > (int)PozNewX - 0.1))
+				//				&& (PozNewX <= ((int)PozNewX))) //&& (PozNewX > (int)PozNewX - 0.1))
 			{
 				PozX = (int)PozNewX; // +0.5;
 				PozZ = PozNewZ;

@@ -45,6 +45,7 @@ void drawObject() {
 	map->shaderProgram()->use();
 	glUniformMatrix4fv(map->shaderProgram()->getUniformLocation("P"), 1, false, glm::value_ptr(matP));
 	glUniformMatrix4fv(map->shaderProgram()->getUniformLocation("V"), 1, false, glm::value_ptr(matV));
+	map->manage();
 	map->draw();
 }
 
@@ -60,11 +61,22 @@ void displayFrame() {
 
 void nextFrame(void) {
 	int actTime=glutGet(GLUT_ELAPSED_TIME);
+	map->pacman->go();
+	for (auto ghost : map->ghosts)
+		ghost->go();
 	int interval=actTime-lastTime;
 	lastTime=actTime;
 	camera.update(interval / 1000.0);
 	glutPostRedisplay();
 }
+
+void timer(int value)
+{
+	for (auto ghost : map->ghosts)
+		ghost->setDirection();
+	glutTimerFunc(1000, timer, 0);
+}
+
 
 void specialKeyDown(int c, int x, int y)
 {
@@ -137,6 +149,7 @@ void initGLUT(int *argc, char** argv) {
 	glutReshapeFunc(changeSize); //Zarejestruj procedurê changeSize jako procedurê obs³uguj¹ca zmianê rozmiaru okna
 	glutDisplayFunc(displayFrame); //Zarejestruj procedurê displayFrame jako procedurê obs³uguj¹ca odœwierzanie okna
 	glutIdleFunc(nextFrame); //Zarejestruj procedurê nextFrame jako procedurê wywo³ywan¹ najczêœciêj jak siê da (animacja)
+	glutTimerFunc(1000, timer, 0);
 
 	glutSpecialFunc(specialKeyDown);
 	//glutSpecialUpFunc(specialKeyUp);
