@@ -20,6 +20,8 @@ public:
 	Map();
 	void draw();
 	void manage();
+	void stop();
+	int getRemainedFood();
 	~Map();
 	ShaderProgram* shaderProgram() { return _shaderProgram; }
 	Pacman *pacman;

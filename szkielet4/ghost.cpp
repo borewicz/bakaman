@@ -14,12 +14,13 @@ void Ghost::loadMap()
 	inputFile >> boardSizeRow;
 	inputFile >> boardSizeCol;
 
-	Tablica.resize(boardSizeCol, std::vector<int>(boardSizeRow, 0));
+	Tablica.resize(boardSizeRow, std::vector<int>(boardSizeCol, 0));
 
 	for (int row = 0; row < boardSizeRow; row++)
 		for (int col = 0; col < boardSizeCol; col++)
 			inputFile >> Tablica[row][col];
 }
+
 void Ghost::setDirection()
 {
 	int Los;

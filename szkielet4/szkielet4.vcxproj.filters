@@ -42,7 +42,7 @@
     <ClCompile Include="ghost.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="food.cpp">
+    <ClCompile Include="text_renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,7 +56,6 @@
     <None Include="cube.obj">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shaderprogram.h">
@@ -92,8 +91,16 @@
     <ClInclude Include="ghost.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="food.h">
+    <ClInclude Include="text_renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="font_fshader.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="font_vshader.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

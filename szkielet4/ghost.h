@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ctime>
+
 #include "object.h"
 
 class Ghost : public Object
@@ -31,6 +33,7 @@ class Ghost : public Object
 	}
 public:
 	Ghost(ShaderProgram *shaderProgram) : Object(".\\cube.obj", "tiger.tga", shaderProgram) {
+		srand(time(NULL));
 		loadMap();
 	}
 
@@ -40,6 +43,9 @@ public:
 		PozX = x();
 		PozZ = y();
 		_start = true;
+	}
+	void stop() {
+		_start = false;
 	}
 	~Ghost();
 };

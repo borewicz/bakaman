@@ -3,12 +3,14 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
-#include <stdio.h>
+#include <cstdio>
+#include <string>
 
 #include "shaderprogram.h"
 //#include "object.h"
 #include "map.h"
 #include "camera.h"
+#include "text_renderer.h"
 
 //Macierze
 glm::mat4  matP;//rzutowania
@@ -18,8 +20,8 @@ glm::mat4  matM;//modelu
 //Ustawienia okna i rzutowania
 int windowPositionX=100;
 int windowPositionY=100;
-int windowWidth=400;
-int windowHeight=400;
+int windowWidth=800;
+int windowHeight=600;
 float cameraAngle=45.0f;
 
 //Zmienne do animacji
@@ -32,13 +34,14 @@ float angle_y=0;
 Object *cube, *cube2;
 ShaderProgram *shaderProgram; 
 Map *map;
+TextRenderer *textRenderer;
 
 // camera(eye,center,nose,ghost_mode_on?)
 Camera camera(
-	glm::vec3(10.0f, 0.0f, 30.0f), //eye
-	glm::vec3(10.0f, 10.0f, 0.0f), //center
+	glm::vec3(15.0f, 0.0f, 40.0f), //eye
+	glm::vec3(15.0f, 15.0f, 0.0f), //center
 	glm::vec3(0.0f, 1.0f, 0.0f), //up
-	false
+	true
 );
 
 void drawObject() {
@@ -47,6 +50,7 @@ void drawObject() {
 	glUniformMatrix4fv(map->shaderProgram()->getUniformLocation("V"), 1, false, glm::value_ptr(matV));
 	map->manage();
 	map->draw();
+	textRenderer->renderText(std::to_string(map->getRemainedFood()) + " remaining", 30, 30, 0.8f, glm::vec3(1, 1, 1));
 }
 
 //Procedura rysuj¹ca
@@ -135,12 +139,13 @@ void changeSize(int w, int h) {
 	glViewport(0,0,w,h);
 	windowWidth=w;
 	windowHeight=h;
+	textRenderer->resizeWindow(windowWidth, windowHeight);
 }
 
 //Procedura inicjuj¹ca biblotekê glut
 void initGLUT(int *argc, char** argv) {
 	glutInit(argc,argv); //Zainicjuj bibliotekê GLUT
-	glutInitDisplayMode(GLUT_3_2_CORE_PROFILE | GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH); //Alokuj bufory kolorów (podwójne buforowanie) i bufor kolorów
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH); //Alokuj bufory kolorów (podwójne buforowanie) i bufor kolorów
 	
 	glutInitWindowPosition(windowPositionX,windowPositionY); //Wska¿ pocz¹tkow¹ pozycjê okna
 	glutInitWindowSize(windowWidth,windowHeight); //Wska¿ pocz¹tkowy rozmiar okna
@@ -168,9 +173,16 @@ void initGLEW() {
 	
 }
 
+void initFonts() {
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	textRenderer = new TextRenderer(windowWidth, windowHeight);
+}
+
 int main(int argc, char** argv) {
 	initGLUT(&argc,argv);
 	initGLEW();
+	initFonts();
 
 	shaderProgram = new ShaderProgram("vshader.txt", NULL, "fshader.txt");
 	glEnable(GL_DEPTH_TEST);

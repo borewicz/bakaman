@@ -56,7 +56,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>OPENGL32.LIB;freeglut.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OPENGL32.LIB;freeglut.lib;glew32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -78,7 +78,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
-    <ClCompile Include="food.cpp" />
     <ClCompile Include="ghost.cpp" />
     <ClCompile Include="main_file.cpp" />
     <ClCompile Include="map.cpp" />
@@ -86,17 +85,16 @@
     <ClCompile Include="obj_loader.cpp" />
     <ClCompile Include="pacman.cpp" />
     <ClCompile Include="shaderprogram.cpp" />
+    <ClCompile Include="text_renderer.cpp" />
     <ClCompile Include="tga.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
     <None Include="fshader.txt" />
     <None Include="vshader.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
     <ClInclude Include="cube.h" />
-    <ClInclude Include="food.h" />
     <ClInclude Include="ghost.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="object.h" />
@@ -105,12 +103,17 @@
     <ClInclude Include="pacman.h" />
     <ClInclude Include="shaderprogram.h" />
     <ClInclude Include="teapot.h" />
+    <ClInclude Include="text_renderer.h" />
     <ClInclude Include="tga.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cube.obj">
       <FileType>Text</FileType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="font_fshader.txt" />
+    <Text Include="font_vshader.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

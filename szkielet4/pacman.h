@@ -47,5 +47,8 @@ public:
 		PozZ = y(); 
 		_start = true;
 	}
+	void stop() {
+		_start = false;
+	}
 	~Pacman();
 };

@@ -79,7 +79,7 @@ void Map::draw()
 	for (auto obj : walls)
 		obj->draw();
 	for (auto ghost : ghosts)
-		ghost->draw();
+		ghost->stop();
 	for (auto f : food)
 		f->draw();
 	pacman->draw();
@@ -98,9 +98,27 @@ void Map::manage()
 		}
 	};
 	if (food.empty())
-		printf("YOU WIN!");
+		stop();
+	for (i = 0; i < ghosts.size(); i++)
+	{
+		if (pacman->X() == ghosts.at(i)->X() && pacman->Y() == ghosts.at(i)->Y())
+		{
+			stop();
+		}
+	};
 }
 
+void Map::stop()
+{
+	for (auto ghost : ghosts)
+		ghost->stop();
+	pacman->stop();
+}
+
+int Map::getRemainedFood()
+{
+	return food.size();
+}
 Map::~Map()
 {
 }

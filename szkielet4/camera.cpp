@@ -70,7 +70,7 @@ void Camera::update(float interval)
     {
       glm::vec3 dir = glm::normalize(center-eye);
       glm::vec3 side = glm::cross(nose,dir);
-      eye -= side*interval;
+	  eye -= side*interval;
       center -= side*interval;
     }
   if(angleX != 0)		// x rotation
