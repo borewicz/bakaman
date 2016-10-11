@@ -79,7 +79,7 @@ void Map::draw()
 	for (auto obj : walls)
 		obj->draw();
 	for (auto ghost : ghosts)
-		ghost->stop();
+		ghost->draw();
 	for (auto f : food)
 		f->draw();
 	pacman->draw();
