@@ -19,7 +19,8 @@ class Map
 public:
 	Map();
 	void draw();
-	void manage();
+	void reset();
+	int checkState();
 	void stop();
 	int getRemainedFood();
 	~Map();

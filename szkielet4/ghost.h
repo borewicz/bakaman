@@ -32,7 +32,7 @@ class Ghost : public Object
 		//	return FieldType::WALL;
 	}
 public:
-	Ghost(ShaderProgram *shaderProgram) : Object(".\\cube.obj", "tiger.tga", shaderProgram) {
+	Ghost(ShaderProgram *shaderProgram) : Object(".\\ghost.obj", "beka2.tga", shaderProgram) {
 		srand(time(NULL));
 		loadMap();
 	}

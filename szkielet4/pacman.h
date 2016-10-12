@@ -34,7 +34,7 @@ private:
 	}
 	void loadMap();
 public:
-	Pacman(ShaderProgram *shaderProgram) : Object(".\\cube.obj", "stones.tga", shaderProgram) {
+	Pacman(ShaderProgram *shaderProgram) : Object(".\\pacman.obj", "beka.tga", shaderProgram) {
 		loadMap();
 	}
 	void goLeft();

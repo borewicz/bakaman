@@ -17,9 +17,9 @@ class Object
 {
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> uvs;
-	std::vector<glm::vec3> normals; // Won't be used at the moment.
+	std::vector<glm::vec3> normals; 
 
-	GLuint vertexBuffer, uvBuffer;
+	GLuint vertexBuffer, uvBuffer, normalsBuffer;
 	GLuint _vao, _vbo;
 	int vertexCount, vertexSize;
 	void setupVAO();

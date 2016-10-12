@@ -56,9 +56,13 @@ void Object::setupVAO() {
 	glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
 	glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
 
+	glGenBuffers(1, &normalsBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, normalsBuffer);
+	glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(glm::vec4), &normals[0], GL_STATIC_DRAW);
+
 	assignVBOtoAttribute("vertex", vertexBuffer, 3); //"vertex" odnosi siê do deklaracji "in vec4 vertex;" w vertex shaderze
 	//assignVBOtoAttribute("color", makeBuffer(colors), sizeof(glm::vec4)); //"color" odnosi siê do deklaracji "in vec4 color;" w vertex shaderze
-	//assignVBOtoAttribute("normal", makeBuffer(normals), sizeof(glm::vec4)); //"normal" odnosi siê do deklaracji "in vec4 normal;" w vertex shaderze
+	//assignVBOtoAttribute("normal", normalsBuffer, 4); //"normal" odnosi siê do deklaracji "in vec4 normal;" w vertex shaderze
 	assignVBOtoAttribute("texCoord", uvBuffer, 2); //"texCoord" odnosi siê do deklaracji "in vec2 texCoord;" w vertex shaderze
 
 	glBindVertexArray(0);

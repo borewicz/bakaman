@@ -56,6 +56,9 @@
     <None Include="cube.obj">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="pacman.obj">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shaderprogram.h">

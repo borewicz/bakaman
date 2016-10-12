@@ -101,7 +101,7 @@ void Ghost::setDirection()
 void Ghost::go()
 {
 	if (!_start) return;
-	float Przesow = 0.17;
+	float Przesow = 0.14;
 
 	//Przesow = Opoznienie * Predkosc;
 	//if (Przesow > 0.4) Przesow = 0.4; //gdy wyciaga malo klatek

@@ -48,9 +48,16 @@ void drawObject() {
 	map->shaderProgram()->use();
 	glUniformMatrix4fv(map->shaderProgram()->getUniformLocation("P"), 1, false, glm::value_ptr(matP));
 	glUniformMatrix4fv(map->shaderProgram()->getUniformLocation("V"), 1, false, glm::value_ptr(matV));
-	map->manage();
 	map->draw();
-	textRenderer->renderText(std::to_string(map->getRemainedFood()) + " remaining", 30, 30, 0.8f, glm::vec3(1, 1, 1));
+	switch (map->checkState())
+	{
+		case 0: textRenderer->renderText(std::to_string(map->getRemainedFood()) + " remaining", 30, 30, 0.8f, glm::vec3(1, 1, 1));
+			break;
+		case 1: textRenderer->renderText("You win!", 30, 30, 0.8f, glm::vec3(1, 1, 1));
+			break;
+		case -1: textRenderer->renderText("You lose!", 30, 30, 0.8f, glm::vec3(1, 1, 1));
+			break;
+	}	
 }
 
 //Procedura rysuj¹ca
@@ -114,6 +121,9 @@ void keyDown(unsigned char c, int x, int y) {
 			break;
 		case 'd':
 			camera.keyDown(3);
+			break;
+		case 'r':
+			map->reset();
 			break;
 	}
 }
@@ -186,6 +196,12 @@ int main(int argc, char** argv) {
 
 	shaderProgram = new ShaderProgram("vshader.txt", NULL, "fshader.txt");
 	glEnable(GL_DEPTH_TEST);
+	glEnable
+		(
+		GL_LIGHTING
+		);
+	glEnable
+		(GL_LIGHT4);
 
 	map = new Map();
 	glutMainLoop();

@@ -23,8 +23,8 @@ uniform vec4 lightPosition; //wspolrzedne homogeniczne swiatla w przestrzeni swi
 void main(void) {
 	gl_Position=P*V*M*vec4(vertex, 1);
 
-	l=normalize(V*(lightPosition-M*vec4(vertex, 1))); //wektor do swiatla w przestrzeni oka
-	n=normalize(V*M*normal); //wektor normalny w przestrzeni oka - uwaga! poprawnie powinno sie mnozyc razy G=transpose(invert(M))
+	l=normalize(V*(lightPosition-M*vec4(vertex, 1))); 
+	n=normalize(V*M*normal);
 	v=normalize(vec4(0,0,0,1)-V*M*vec4(vertex, 1));
 	interpolatedColor=color;
 	iTexCoord=texCoord;
